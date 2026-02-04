@@ -57,6 +57,7 @@ class KeyCounterOverlay:
         self.menu.add_command(label="Reset", command=self.reset)
         self.menu.add_separator()
         self.menu.add_command(label="Text Color...", command=self.change_color)
+        self.menu.add_command(label="Background Color...", command=self.change_bg_color)
         self.menu.add_command(label="Transparency...", command=self.change_transparency)
         self.menu.add_separator()
         self.menu.add_command(label="Exit", command=self.root.quit)
