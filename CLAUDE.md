@@ -1,6 +1,6 @@
 # Key Counter Overlay
 
-A minimal, borderless click counter overlay.
+A minimal, borderless click counter overlay with timer.
 
 ## Files
 
@@ -36,16 +36,23 @@ python3 key_counter_overlay.py
 | Left-click | +1 to counter |
 | Drag | Move window |
 | Right-click | Context menu |
+| Ctrl+Click | Context menu (macOS) |
+| Middle-click | Context menu |
 
 ## Right-click Menu
 
 | Option | Action |
 |--------|--------|
 | Set Number... | Manually enter count |
-| Reset | Reset to 0 |
+| Reset | Reset counter to 0 |
 | Text Color... | Change text color |
+| Font Size... | Change font size (8-200) |
 | Background Color... | Change background color |
 | Transparency... | Window opacity (10-100%) |
+| Timer → Show/Hide | Toggle timer display |
+| Timer → Start | Start timer |
+| Timer → Pause | Pause timer |
+| Timer → Reset | Reset timer to 00:00:00 |
 | Exit | Quit |
 
 ## Configuration
@@ -64,7 +71,9 @@ Examples:
 - Draggable window
 - Auto-sizes to fit text
 - Customizable text/background color
+- Adjustable font size
 - Adjustable transparency
+- Built-in timer (start/pause/reset)
 - Custom display format via config.txt
 - Cross-platform (macOS, Linux, Windows)
 - Auto-installs Python and tkinter if missing
