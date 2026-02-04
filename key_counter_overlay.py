@@ -57,6 +57,7 @@ class KeyCounterOverlay:
         self.menu.add_command(label="Reset", command=self.reset)
         self.menu.add_separator()
         self.menu.add_command(label="Text Color...", command=self.change_color)
+        self.menu.add_command(label="Font Size...", command=self.change_font_size)
         self.menu.add_command(label="Background Color...", command=self.change_bg_color)
         self.menu.add_command(label="Transparency...", command=self.change_transparency)
         self.menu.add_separator()
@@ -140,6 +141,25 @@ class KeyCounterOverlay:
                                        parent=self.root)
         if color[1]:
             self.label.config(fg=color[1])
+
+    def change_font_size(self):
+        current_font = self.label.cget("font")
+        # Get current size
+        current_size = 24  # default
+        if isinstance(current_font, str):
+            parts = current_font.split()
+            for p in parts:
+                if p.isdigit():
+                    current_size = int(p)
+                    break
+
+        result = simpledialog.askinteger("Font Size", "Enter font size (8-200):",
+                                          initialvalue=current_size,
+                                          minvalue=8, maxvalue=200,
+                                          parent=self.root)
+        if result is not None:
+            self.label.config(font=("Helvetica", result, "bold"))
+            self.resize_window()
 
     def change_bg_color(self):
         color = colorchooser.askcolor(title="Choose Background Color",
