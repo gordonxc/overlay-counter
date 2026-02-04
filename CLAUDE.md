@@ -1,11 +1,15 @@
 # Key Counter Overlay
 
-A minimal, portable key counter overlay for tracking key presses.
+A minimal, borderless click counter overlay.
 
 ## Files
 
 - `key_counter_overlay.py` - Main Python/tkinter application
-- `run_counter.sh` - Shell script to check environment and launch
+- `config.txt` - Display format configuration
+- `run_counter.sh` - Shell script launcher (auto-installs dependencies)
+- `Key Counter.command` - macOS double-click launcher
+- `start.bat` - Windows double-click launcher
+- `README.md` - Documentation (Traditional Chinese)
 
 ## Requirements
 
@@ -14,33 +18,39 @@ A minimal, portable key counter overlay for tracking key presses.
 
 ## Usage
 
+**macOS:** Double-click `Key Counter.command`
+
+**Windows:** Double-click `start.bat`
+
+**Terminal:**
 ```bash
 ./run_counter.sh
-```
-
-Or directly:
-
-```bash
+# or
 python3 key_counter_overlay.py
 ```
 
 ## Controls
 
-| Key | Action |
-|-----|--------|
-| Any key | +1 to counter |
-| `r` | Reset to 0 |
-| `Escape` | Quit |
+| Action | Result |
+|--------|--------|
+| Left-click | +1 to counter |
+| Right-click | Menu (Reset / Exit) |
+
+## Configuration
+
+Edit `config.txt` to customize display format. Use `{count}` as placeholder.
+
+Examples:
+- `{count}` → `0`, `1`, `2`...
+- `Score: {count}` → `Score: 0`, `Score: 1`...
+- `Deaths: {count}` → `Deaths: 0`, `Deaths: 1`...
 
 ## Features
 
-- Resizable window
+- Borderless, minimal window
 - Always-on-top overlay
-- Semi-transparent background (85% opacity)
+- Auto-sizes to fit text
+- Semi-transparent (85% opacity)
+- Custom display format via config.txt
 - Cross-platform (macOS, Linux, Windows)
-
-## Platform Notes
-
-- **macOS**: Works out of the box with system Python
-- **Linux**: May need `sudo apt install python3-tk`
-- **Windows**: Install Python from python.org (includes tkinter)
+- Auto-installs missing dependencies
