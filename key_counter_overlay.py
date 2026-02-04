@@ -106,6 +106,14 @@ class KeyCounterOverlay:
         self.root.lift()
         self.root.after(100, self.stay_on_top)
 
+    def resize_window(self):
+        self.root.update_idletasks()
+        width = self.label.winfo_reqwidth()
+        height = self.label.winfo_reqheight()
+        x = self.root.winfo_x()
+        y = self.root.winfo_y()
+        self.root.geometry(f"{width}x{height}+{x}+{y}")
+
     def on_press(self, event):
         self._drag_start_x = event.x
         self._drag_start_y = event.y
