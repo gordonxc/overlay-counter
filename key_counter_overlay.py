@@ -5,6 +5,7 @@ Left-click to increment. Right-click for menu.
 """
 
 import tkinter as tk
+from tkinter import simpledialog
 import sys
 import os
 
@@ -52,6 +53,7 @@ class KeyCounterOverlay:
 
         # Right-click context menu
         self.menu = tk.Menu(self.root, tearoff=0)
+        self.menu.add_command(label="Set Number...", command=self.set_number)
         self.menu.add_command(label="Reset", command=self.reset)
         self.menu.add_separator()
         self.menu.add_command(label="Exit", command=self.root.quit)
@@ -119,6 +121,14 @@ class KeyCounterOverlay:
     def reset(self):
         self.count = 0
         self.label.config(text=self.format.format(count=0))
+
+    def set_number(self):
+        result = simpledialog.askinteger("Set Number", "Enter count:",
+                                          initialvalue=self.count,
+                                          parent=self.root)
+        if result is not None:
+            self.count = result
+            self.label.config(text=self.format.format(count=self.count))
 
     def show_menu(self, event):
         self.menu.tk_popup(event.x_root, event.y_root)
