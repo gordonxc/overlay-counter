@@ -97,11 +97,19 @@ class KeyCounterOverlay:
         self.label.bind("<B1-Motion>", self.on_drag)
         self.label.bind("<ButtonRelease-1>", self.on_release)
         self.label.bind("<Button-3>", self.show_menu)
+        self.label.bind("<Button-2>", self.show_menu)  # Middle click
+        self.label.bind("<Control-Button-1>", self.show_menu)  # macOS Ctrl+click
 
         # Mouse bindings - timer label (drag only, no increment)
         self.timer_label.bind("<Button-1>", self.on_timer_press)
         self.timer_label.bind("<B1-Motion>", self.on_drag)
         self.timer_label.bind("<Button-3>", self.show_menu)
+        self.timer_label.bind("<Button-2>", self.show_menu)
+        self.timer_label.bind("<Control-Button-1>", self.show_menu)
+
+        # Click anywhere to focus
+        self.root.bind("<Button-1>", self.on_focus)
+        self.root.bind("<Button-3>", self.on_focus)
 
         # Drag state
         self._drag_start_x = 0
@@ -153,12 +161,17 @@ class KeyCounterOverlay:
         y = self.root.winfo_y()
         self.root.geometry(f"{width}x{height}+{x}+{y}")
 
+    def on_focus(self, event):
+        self.root.focus_force()
+
     def on_press(self, event):
+        self.root.focus_force()
         self._drag_start_x = event.x
         self._drag_start_y = event.y
         self._dragged = False
 
     def on_timer_press(self, event):
+        self.root.focus_force()
         self._drag_start_x = event.x
         self._drag_start_y = event.y
 
@@ -289,6 +302,7 @@ class KeyCounterOverlay:
         self.timer_label.config(text=f"{hours:02d}:{minutes:02d}:{seconds:02d}")
 
     def show_menu(self, event):
+        self.root.focus_force()
         self.menu.tk_popup(event.x_root, event.y_root)
 
     def run(self):
