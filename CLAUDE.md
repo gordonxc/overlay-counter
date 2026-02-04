@@ -7,8 +7,8 @@ A minimal, borderless click counter overlay.
 - `key_counter_overlay.py` - Main Python/tkinter application
 - `config.txt` - Display format configuration
 - `run_counter.sh` - Shell script launcher (auto-installs dependencies)
-- `Key Counter.command` - macOS double-click launcher
-- `start.bat` - Windows double-click launcher
+- `start.command` - macOS double-click launcher (hides terminal)
+- `start.bat` - Windows double-click launcher (hides console)
 - `README.md` - Documentation (Traditional Chinese)
 
 ## Requirements
@@ -18,7 +18,7 @@ A minimal, borderless click counter overlay.
 
 ## Usage
 
-**macOS:** Double-click `Key Counter.command`
+**macOS:** Double-click `start.command`
 
 **Windows:** Double-click `start.bat`
 
@@ -34,7 +34,19 @@ python3 key_counter_overlay.py
 | Action | Result |
 |--------|--------|
 | Left-click | +1 to counter |
-| Right-click | Menu (Reset / Exit) |
+| Drag | Move window |
+| Right-click | Context menu |
+
+## Right-click Menu
+
+| Option | Action |
+|--------|--------|
+| Set Number... | Manually enter count |
+| Reset | Reset to 0 |
+| Text Color... | Change text color |
+| Background Color... | Change background color |
+| Transparency... | Window opacity (10-100%) |
+| Exit | Quit |
 
 ## Configuration
 
@@ -49,11 +61,14 @@ Examples:
 
 - Borderless, minimal window
 - Always-on-top overlay
+- Draggable window
 - Auto-sizes to fit text
-- Semi-transparent (85% opacity)
+- Customizable text/background color
+- Adjustable transparency
 - Custom display format via config.txt
 - Cross-platform (macOS, Linux, Windows)
 - Auto-installs Python and tkinter if missing
+- Launches without terminal/console window
 
 ## Auto-install Support
 
