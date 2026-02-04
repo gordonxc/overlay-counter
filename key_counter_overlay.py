@@ -5,7 +5,7 @@ Left-click to increment. Right-click for menu.
 """
 
 import tkinter as tk
-from tkinter import simpledialog
+from tkinter import simpledialog, colorchooser
 import sys
 import os
 
@@ -55,6 +55,9 @@ class KeyCounterOverlay:
         self.menu = tk.Menu(self.root, tearoff=0)
         self.menu.add_command(label="Set Number...", command=self.set_number)
         self.menu.add_command(label="Reset", command=self.reset)
+        self.menu.add_separator()
+        self.menu.add_command(label="Text Color...", command=self.change_color)
+        self.menu.add_command(label="Transparency...", command=self.change_transparency)
         self.menu.add_separator()
         self.menu.add_command(label="Exit", command=self.root.quit)
 
@@ -129,6 +132,22 @@ class KeyCounterOverlay:
         if result is not None:
             self.count = result
             self.label.config(text=self.format.format(count=self.count))
+
+    def change_color(self):
+        color = colorchooser.askcolor(title="Choose Text Color",
+                                       initialcolor=self.label.cget("fg"),
+                                       parent=self.root)
+        if color[1]:
+            self.label.config(fg=color[1])
+
+    def change_transparency(self):
+        current = int(self.root.attributes("-alpha") * 100)
+        result = simpledialog.askinteger("Transparency", "Enter transparency (10-100%):",
+                                          initialvalue=current,
+                                          minvalue=10, maxvalue=100,
+                                          parent=self.root)
+        if result is not None:
+            self.root.attributes("-alpha", result / 100)
 
     def show_menu(self, event):
         self.menu.tk_popup(event.x_root, event.y_root)
