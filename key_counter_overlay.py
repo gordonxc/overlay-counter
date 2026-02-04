@@ -56,11 +56,16 @@ class KeyCounterOverlay:
         self.menu.add_separator()
         self.menu.add_command(label="Exit", command=self.root.quit)
 
-        # Left-click to increment
-        self.label.bind("<Button-1>", self.increment)
-
-        # Right-click for menu
+        # Mouse bindings
+        self.label.bind("<Button-1>", self.on_press)
+        self.label.bind("<B1-Motion>", self.on_drag)
+        self.label.bind("<ButtonRelease-1>", self.on_release)
         self.label.bind("<Button-3>", self.show_menu)
+
+        # Drag state
+        self._drag_start_x = 0
+        self._drag_start_y = 0
+        self._dragged = False
 
         # Auto-size window to fit content, then center
         self.root.update_idletasks()
@@ -94,9 +99,22 @@ class KeyCounterOverlay:
         self.root.lift()
         self.root.after(100, self.stay_on_top)
 
-    def increment(self, event):
-        self.count += 1
-        self.label.config(text=self.format.format(count=self.count))
+    def on_press(self, event):
+        self._drag_start_x = event.x
+        self._drag_start_y = event.y
+        self._dragged = False
+
+    def on_drag(self, event):
+        self._dragged = True
+        x = self.root.winfo_x() + event.x - self._drag_start_x
+        y = self.root.winfo_y() + event.y - self._drag_start_y
+        self.root.geometry(f"+{x}+{y}")
+
+    def on_release(self, event):
+        if not self._dragged:
+            # Only increment if not dragged
+            self.count += 1
+            self.label.config(text=self.format.format(count=self.count))
 
     def reset(self):
         self.count = 0
