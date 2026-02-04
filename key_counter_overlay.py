@@ -141,6 +141,14 @@ class KeyCounterOverlay:
         if color[1]:
             self.label.config(fg=color[1])
 
+    def change_bg_color(self):
+        color = colorchooser.askcolor(title="Choose Background Color",
+                                       initialcolor=self.label.cget("bg"),
+                                       parent=self.root)
+        if color[1]:
+            self.root.configure(bg=color[1])
+            self.label.config(bg=color[1])
+
     def change_transparency(self):
         current = int(self.root.attributes("-alpha") * 100)
         result = simpledialog.askinteger("Transparency", "Enter transparency (10-100%):",
