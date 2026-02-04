@@ -25,16 +25,51 @@ elif command -v python &> /dev/null; then
     if [ "$PY_VERSION" = "3" ]; then
         PYTHON_CMD="python"
     else
-        echo -e "${RED}Error: Python 3 is required but only Python 2 was found.${NC}"
-        exit 1
+        echo -e "${YELLOW}Python 3 not found. Attempting to install...${NC}"
+        PYTHON_CMD=""
     fi
 else
-    echo -e "${RED}Error: Python is not installed.${NC}"
-    echo "Please install Python 3:"
-    echo "  macOS:   brew install python3"
-    echo "  Ubuntu:  sudo apt install python3 python3-tk"
-    echo "  Windows: https://www.python.org/downloads/"
-    exit 1
+    echo -e "${YELLOW}Python not found. Attempting to install...${NC}"
+    PYTHON_CMD=""
+fi
+
+# Auto-install Python if not found
+if [ -z "$PYTHON_CMD" ]; then
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        # macOS
+        if command -v brew &> /dev/null; then
+            brew install python3
+            PYTHON_CMD="python3"
+        else
+            echo -e "${RED}Error: Homebrew not found. Please install Python manually:${NC}"
+            echo "  brew install python3"
+            echo "  or visit https://www.python.org/downloads/"
+            exit 1
+        fi
+    elif command -v apt &> /dev/null; then
+        # Debian/Ubuntu
+        sudo apt update && sudo apt install -y python3 python3-tk
+        PYTHON_CMD="python3"
+    elif command -v dnf &> /dev/null; then
+        # Fedora
+        sudo dnf install -y python3 python3-tkinter
+        PYTHON_CMD="python3"
+    elif command -v pacman &> /dev/null; then
+        # Arch
+        sudo pacman -S --noconfirm python python-tk
+        PYTHON_CMD="python3"
+    else
+        echo -e "${RED}Error: Could not detect package manager.${NC}"
+        echo "Please install Python 3 manually."
+        exit 1
+    fi
+
+    # Verify installation
+    if ! command -v $PYTHON_CMD &> /dev/null; then
+        echo -e "${RED}Error: Python installation failed.${NC}"
+        exit 1
+    fi
+    echo -e "${GREEN}✓${NC} Python installed successfully"
 fi
 
 echo -e "${GREEN}✓${NC} Python found: $($PYTHON_CMD --version)"

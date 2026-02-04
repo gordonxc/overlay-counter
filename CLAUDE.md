@@ -13,8 +13,8 @@ A minimal, borderless click counter overlay.
 
 ## Requirements
 
-- Python 3
-- tkinter (usually built-in with Python)
+- Python 3 (auto-installed if missing)
+- tkinter (auto-installed if missing)
 
 ## Usage
 
@@ -53,4 +53,14 @@ Examples:
 - Semi-transparent (85% opacity)
 - Custom display format via config.txt
 - Cross-platform (macOS, Linux, Windows)
-- Auto-installs missing dependencies
+- Auto-installs Python and tkinter if missing
+
+## Auto-install Support
+
+| Platform | Package Manager |
+|---|---|
+| macOS | Homebrew |
+| Ubuntu/Debian | apt |
+| Fedora | dnf |
+| Arch | pacman |
+| Windows | winget / Chocolatey |
