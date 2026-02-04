@@ -5,35 +5,56 @@
 ## 功能
 
 - 左鍵點擊 +1
-- 右鍵選單（重置 / 退出）
+- 拖曳移動視窗
+- 右鍵選單
 - 永遠置頂
 - 自訂顯示格式
+- 自訂文字/背景顏色
+- 可調整透明度
+- 自動安裝缺少的依賴項
+- 啟動時隱藏終端機視窗
 
 ## 安裝需求
 
-- Python 3
-- tkinter（通常已內建於 Python）
+- Python 3（如缺少會自動安裝）
+- tkinter（如缺少會自動安裝）
 
 ## 使用方法
 
 ### macOS
 
-雙擊 `Key Counter.command`
-
-或於終端機執行：
-```bash
-./run_counter.sh
-```
+雙擊 `start.command`
 
 ### Windows
 
 雙擊 `start.bat`
 
-### 直接執行
+### 終端機
 
 ```bash
+./run_counter.sh
+# 或
 python3 key_counter_overlay.py
 ```
+
+## 操作方式
+
+| 動作 | 結果 |
+|------|------|
+| 左鍵點擊 | +1 |
+| 拖曳 | 移動視窗 |
+| 右鍵點擊 | 開啟選單 |
+
+## 右鍵選單
+
+| 選項 | 功能 |
+|------|------|
+| Set Number... | 手動輸入數字 |
+| Reset | 重置為 0 |
+| Text Color... | 更改文字顏色 |
+| Background Color... | 更改背景顏色 |
+| Transparency... | 調整透明度 (10-100%) |
+| Exit | 退出 |
 
 ## 自訂顯示格式
 
@@ -49,18 +70,20 @@ python3 key_counter_overlay.py
 
 ## 平台支援
 
-| 平台 | 狀態 |
-|---|---|
-| macOS | ✓ 支援 |
-| Windows | ✓ 支援 |
-| Linux | ✓ 支援（可能需要安裝 `python3-tk`） |
+| 平台 | 狀態 | 套件管理器 |
+|------|------|-----------|
+| macOS | ✓ 支援 | Homebrew |
+| Windows | ✓ 支援 | winget / Chocolatey |
+| Ubuntu/Debian | ✓ 支援 | apt |
+| Fedora | ✓ 支援 | dnf |
+| Arch | ✓ 支援 | pacman |
 
 ## 檔案說明
 
 | 檔案 | 說明 |
-|---|---|
+|------|------|
 | `key_counter_overlay.py` | 主程式 |
 | `config.txt` | 顯示格式設定 |
-| `Key Counter.command` | macOS 啟動器 |
-| `start.bat` | Windows 啟動器 |
-| `run_counter.sh` | Shell 啟動腳本 |
+| `start.command` | macOS 啟動器（隱藏終端機）|
+| `start.bat` | Windows 啟動器（隱藏控制台）|
+| `run_counter.sh` | Shell 啟動腳本（自動安裝依賴）|
