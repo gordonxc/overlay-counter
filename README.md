@@ -2,6 +2,18 @@
 
 一個簡約、無邊框的桌面計數器懸浮窗，附帶計時器功能。
 
+## 下載
+
+從 [Releases](https://github.com/gordonxc/overlay-counter/releases) 頁面下載最新版本：
+
+| 平台 | 下載檔案 |
+|------|----------|
+| macOS | `key-counter-overlay-vX.X.X-macos.zip` |
+| Windows | `key-counter-overlay-vX.X.X-windows.zip` |
+| Linux | `key-counter-overlay-vX.X.X-linux.tar.gz` |
+
+下載後解壓縮，依照下方「使用方法」執行即可。
+
 ## 功能
 
 - 左鍵點擊 +1
